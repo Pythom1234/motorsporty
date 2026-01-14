@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://g4frjamoy7li"]
+
+[ext_resource type="ArrayMesh" uid="uid://6opvjhil372g" path="res://assets/models/track.res" id="1_mll3j"]
+
+[node name="Track" type="Node3D"]
+
+[node name="Track" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.024569225, -0.0064430907, 1.3241804e-09, 0.0007841926, -0.0029903313, 0.025211178, -0.0063951896, 0.024386572, 0.0030914466, 236.58401, 1.0891705, -292.71912)
+mesh = ExtResource("1_mll3j")
+skeleton = NodePath("")
