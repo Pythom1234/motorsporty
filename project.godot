@@ -21,6 +21,7 @@ config/icon="uid://bvibnwi7f2xwf"
 [autoload]
 
 Teams="*res://teams.gd"
+Globals="*res://globals.gd"
 
 [display]
 
@@ -78,6 +79,7 @@ pointing/stretch/mode="canvas_items"
 
 common/physics_ticks_per_second=120
 common/max_physics_steps_per_frame=16
+3d/physics_engine="Jolt Physics"
 3d/solver/solver_iterations=32
 common/physics_interpolation=true
 common/solver/solver_iterations=32

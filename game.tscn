@@ -79,6 +79,7 @@ script = ExtResource("1_e2o6t")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(1, 0.95, 0.9, 1)
 shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_blend_splits = true
@@ -187,7 +188,8 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 2
+current_tab = 1
+tab_focus_mode = 1
 
 [node name="DevMode" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
 visible = false
@@ -209,10 +211,42 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
 
+[node name="Shop" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 74.0
+offset_right = -100.0
+offset_bottom = 74.0
+grow_horizontal = 2
+
+[node name="Code" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Code:"
+
+[node name="Code" type="LineEdit" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Submit" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+layout_mode = 2
+text = "OK"
+
 [node name="Local" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local"]
 layout_mode = 1
@@ -305,14 +339,20 @@ popup/item_9/text = "Alpine"
 popup/item_9/icon = ExtResource("16_vaj68")
 popup/item_9/id = 9
 
+[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="Start" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Start race"
 
 [node name="Online" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online"]
 layout_mode = 1
@@ -388,7 +428,12 @@ popup/item_9/text = "Alpine"
 popup/item_9/icon = ExtResource("16_vaj68")
 popup/item_9/id = 9
 
+[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="Connect" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 disabled = true
@@ -397,7 +442,7 @@ text = "Connect"
 [node name="Credits" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 3
+metadata/_tab_index = 4
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Prepare/Panel/TabContainer/Credits"]
 layout_mode = 1
@@ -415,17 +460,20 @@ theme_override_font_sizes/bold_font_size = 37
 bbcode_enabled = true
 text = "[b]Head dev[/b]
 [center]Fuca sw.[/center]
-
 [b]Design[/b]
 [center]Sinty[/center]
-
 [b]Formula design[/b]
 [center]Krisis[/center]
-
 [b]Beta testing[/b]
 [center]Krisis[/center]
 [center]ToMaTeVe[/center]
-[center]Slinty[/center]"
+[center]Sinty[/center]
+[center]Danda[/center]
+[center]J. Kori[/center]
+[center]Kubiss[/center]
+[center]seržant Chawo[/center]
+[b]Cheerleader:[/b]
+[center]ToMaTeVe[/center]"
 shortcut_keys_enabled = false
 
 [node name="Finish" type="Control" parent="CanvasLayer"]
@@ -579,6 +627,8 @@ max_value = 300.0
 value = 100.0
 
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/DevMode/Start" to="." method="start_devmode"]
+[connection signal="focus_entered" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code" to="." method="_code_focus_entered"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Submit" to="." method="code_submit"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Minus2" to="." method="_minus_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Minus" to="." method="_minus_pressed"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Plus" to="." method="_plus_pressed"]

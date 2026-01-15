@@ -31,9 +31,9 @@ func set_lights(num):
 		)
 
 func set_team(code):
-	$Base.set_surface_override_material(0, Teams.get_material(code, 0))
-	$Base.set_surface_override_material(2, Teams.get_material(code, 1))
-	$Base.set_surface_override_material(3, Teams.get_material(code, 2))
+	$Base_textured.set_surface_override_material(0, Teams.get_material(code))
+	if Teams.get_secondary_material(code):
+		$Base_black.set_surface_override_material(0, Teams.get_secondary_material(code))
 
 func _process(delta: float) -> void:
 	var dir = -global_transform.basis.z.normalized().dot(linear_velocity.normalized())
@@ -63,10 +63,10 @@ func _process(delta: float) -> void:
 		if starting == -1:
 			if dir < -0.5:
 				engine_force = Input.get_action_strength("forward") * 6700.0
-				brake = Input.get_action_strength("backward") * 21.0
+				brake = Input.get_action_strength("backward") * 35.0
 			elif dir > 0.5:
 				engine_force = -Input.get_action_strength("backward") * 6700.0
-				brake = Input.get_action_strength("forward") * 21.0
+				brake = Input.get_action_strength("forward") * 35.0
 			else:
 				engine_force = Input.get_axis("backward", "forward") * 6700.0
 	else:
@@ -78,30 +78,44 @@ func _process(delta: float) -> void:
 	%Lap.text = "Lap %d/%d" % [lap + 1, laps]
 
 	if starting != -1 or (not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward")):
-		#engine_force = dir * 800
-		brake = 20
+		#engine_force = dir * 8000
+		brake = 17
 
 	var input_axis = Input.get_axis("right", "left")
 	# NOTE: (speed * 3.6)
 	#var max_steer = lerp(deg_to_rad(8.2), deg_to_rad(1.0), clamp(speed / 200.0, 0.0, 1.0))
+	#var max_steer = lerp(
+		#deg_to_rad(13.0),
+		#deg_to_rad(2.2),
+		#clamp((speed * 3.6) / (250.0), 0.0, 1.0)
+	#)
 	var max_steer = lerp(
-		deg_to_rad(20.0 if _dev_steer_max == null else _dev_steer_max),
-		deg_to_rad(3.0 if _dev_steer_min == null else _dev_steer_min),
-		clamp((speed * 3.6) / (300.0 if _dev_max_speed == null else _dev_max_speed), 0.0, 1.0)
+		deg_to_rad(13.5 if _dev_steer_max == null else _dev_steer_max),
+		deg_to_rad(2.9 if _dev_steer_min == null else _dev_steer_min),
+		clamp((speed * 3.6) / (250.0 if _dev_max_speed == null else _dev_max_speed), 0.0, 1.0)
 	)
 	var target_steer = input_axis * max_steer
 	steering = move_toward(steering, target_steer, delta * (0.5 + pow(target_steer - steering, 2)))
+
+	var on_grass = false
+	for wheel in get_children():
+		if wheel is VehicleWheel3D and wheel.is_in_contact():
+			var body = wheel.get_contact_body()
+			if body.get_collision_layer_value(3):
+				on_grass = true
+				break
+	if on_grass:
+		brake = max(brake, lerp(20, 43, (speed * 3.6) / 250.0))
 
 	#var downforce = speed * speed
 	#apply_force(Vector3(0, -downforce, 0), Vector3(0, 0, 3))
 	#apply_force(Vector3(0, -downforce, 0), Vector3(0, 0, -2))
 
 	if Input.is_action_just_pressed("camera"):
-		const NUM_VIEWS = 6
-		for i in range(NUM_VIEWS):
-			if get_node("View_%s" % i).current:
-				get_node("View_%s" % i).current = false
-				get_node("View_%s" % ((i + 1) % NUM_VIEWS)).current = true
+		for i in range($Views.get_child_count()):
+			if get_node("Views/View_%s" % i).current:
+				get_node("Views/View_%s" % i).current = false
+				get_node("Views/View_%s" % ((i + 1) % $Views.get_child_count())).current = true
 				break
 
 func enter_area(area):

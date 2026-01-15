@@ -2,8 +2,8 @@ extends Control
 
 func _ready() -> void:
 	$PanelContainer/GridContainer/Gravity.value = 2.0
-	$PanelContainer/GridContainer/SteerMax.value = 12.0
-	$PanelContainer/GridContainer/SteerMin.value = 2.2
+	$PanelContainer/GridContainer/SteerMax.value = 13.5
+	$PanelContainer/GridContainer/SteerMin.value = 2.9
 	$PanelContainer/GridContainer/MaxSpeed.value = 250.0
 
 func _on_gravity_value_changed(value: float) -> void:

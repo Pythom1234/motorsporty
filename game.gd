@@ -1,7 +1,7 @@
 extends Node3D
 
-#const URL = "wss://motorsporty-pythom2org-4de6691e.koyeb.app/"
-const URL = "ws://localhost:3000"
+const URL = "wss://motorsporty-pythom2org-4de6691e.koyeb.app/"
+#const URL = "ws://localhost:3000"
 var socket = WebSocketPeer.new()
 var connected = false
 var shadows = {}
@@ -10,6 +10,17 @@ var waiting_start = false
 var sent_name = false
 var names = {}
 var my_name = ""
+
+var bought = []
+const codes = {
+	"Krisis123": "g"
+}
+
+func _ready() -> void:
+	bought = Globals.cget("shop", "bought", [])
+	update_bought()
+	$CanvasLayer/Prepare/Panel/TabContainer.current_tab = Globals.cget("UI", "selected_tab", 2)
+	$CanvasLayer/Prepare/Panel/TabContainer.tab_changed.connect(_tab_container_changed)
 
 func _process(_delta: float):
 	get_tree().paused = not race or waiting_start
@@ -243,6 +254,21 @@ func finish(time):
 func retry() -> void:
 	get_tree().reload_current_scene()
 
+func update_bought():
+	var unique = {}
+	for v in bought:
+		unique[v] = null
+	bought = unique.keys()
+	Globals.cset("shop", "bought", bought)
+	if bought.has("g"):
+		var has = false
+		for i in range($CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.item_count):
+			if $CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.get_item_text(i) == "Golden":
+				has = true
+		if not has:
+			$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.add_item("Golden")
+			$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.add_item("Golden")
+
 func _minus_pressed() -> void:
 	$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Laps.text = str(clamp(int($CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Laps.text) - 1, 1, 100))
 
@@ -275,3 +301,19 @@ func check_connect(n, t):
 	if t == null:
 		t = $CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.selected
 	$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Connect.disabled = n == "" or t == -1
+
+func _tab_container_changed(tab: int) -> void:
+	Globals.cset("UI", "selected_tab", tab)
+
+func _code_focus_entered() -> void:
+	var edit = $CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code
+	if OS.get_name() == "Web":
+		var text = JavaScriptBridge.eval("prompt('Code?', '%s')" % edit.text.replace("'", "\\'"))
+		edit.text = text if text != null else edit.text
+		edit.release_focus.call_deferred()
+
+func code_submit() -> void:
+	if codes.has($CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code.text):
+		bought.append(codes[$CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code.text])
+		update_bought()
+	$CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code.text = ""
