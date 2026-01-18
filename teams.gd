@@ -11,7 +11,7 @@ const teams = {
 	"h": [preload("res://assets/logos/haasf1team.png"), preload("res://assets/skins/haasf1team.png")],
 	"u": [preload("res://assets/logos/kicksauber.png"), preload("res://assets/skins/kicksauber.png")],
 	"a": [preload("res://assets/logos/alpine.png"), preload("res://assets/skins/alpine.png")],
-	"g": [preload("res://assets/logos/mclaren.png"), preload("res://assets/skins/mclaren.png")] # TODO
+	"g": [preload("res://assets/logos/gold.png")]
 }
 
 #const teams = {
@@ -38,21 +38,21 @@ const codes = {
 	"Haas F1 Team": "h",
 	"Kick Sauber": "u",
 	"Alpine": "a",
-	"Golden": "g"
+	"Gold": "g"
 }
 
-const codes2 = {
-	"c": "McLaren",
-	"d": "Mercedes",
-	"r": "Red Bull Racing",
-	"f": "Ferrari",
-	"w": "Williams",
-	"i": "Racing Bulls",
-	"m": "Aston Martin",
-	"h": "Haas F1 Team",
-	"u": "Kick Sauber",
-	"a": "Alpine"
-}
+#const codes2 = {
+	#"c": "McLaren",
+	#"d": "Mercedes",
+	#"r": "Red Bull Racing",
+	#"f": "Ferrari",
+	#"w": "Williams",
+	#"i": "Racing Bulls",
+	#"m": "Aston Martin",
+	#"h": "Haas F1 Team",
+	#"u": "Kick Sauber",
+	#"a": "Alpine"
+#}
 
 func get_material(code):
 	var m = StandardMaterial3D.new()

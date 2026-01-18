@@ -11,6 +11,8 @@ var sent_name = false
 var names = {}
 var my_name = ""
 
+var last_sent = 0
+
 var bought = []
 const codes = {
 	"Krisis123": "g"
@@ -21,18 +23,23 @@ func _ready() -> void:
 	update_bought()
 	$CanvasLayer/Prepare/Panel/TabContainer.current_tab = Globals.cget("UI", "selected_tab", 2)
 	$CanvasLayer/Prepare/Panel/TabContainer.tab_changed.connect(_tab_container_changed)
+	$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.selected = Globals.cget("UI", "selected_team", 0)
+	$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.selected = Globals.cget("UI", "selected_team", -1)
 
-func _process(_delta: float):
+func _process(delta: float):
 	get_tree().paused = not race or waiting_start
 	socket.poll()
 	$Shadows.visible = not (waiting_start or $F1.starting != -1 or not connected)
 	$F1/CanvasLayer/UI/Panel/MarginContainer/VBoxContainer/HBoxContainer/Place.visible = not (waiting_start or $F1.starting != -1 or not connected)
 	$F1/CanvasLayer/UI/Laderboard.visible = not (waiting_start or $F1.starting != -1 or not connected)
+	last_sent -= delta
 	var state = socket.get_ready_state()
 	if state == WebSocketPeer.STATE_OPEN:
 		while socket.get_available_packet_count():
 			recieve()
-		send()
+		if last_sent <= 0:
+			send()
+			last_sent = 0.1
 		if not sent_name:
 			var data = my_name.to_utf8_buffer()
 			var buffer = StreamPeerBuffer.new()
@@ -263,11 +270,11 @@ func update_bought():
 	if bought.has("g"):
 		var has = false
 		for i in range($CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.item_count):
-			if $CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.get_item_text(i) == "Golden":
+			if $CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.get_item_text(i) == "Gold":
 				has = true
 		if not has:
-			$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.add_item("Golden")
-			$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.add_item("Golden")
+			$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.add_icon_item(Teams.teams["g"][0], "Gold")
+			$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.add_icon_item(Teams.teams["g"][0], "Gold")
 
 func _minus_pressed() -> void:
 	$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Laps.text = str(clamp(int($CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Laps.text) - 1, 1, 100))
@@ -290,9 +297,15 @@ func _name_focus_entered() -> void:
 	check_connect(edit.text, null)
 
 func _name_text_changed(new_text: String) -> void:
-	check_connect(new_text, null)
+	var pos = $CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name.caret_column
+	$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name.text = new_text.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
+	$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name.caret_column = pos
+	check_connect(null, null)
 
 func _team_item_selected(index: int) -> void:
+	Globals.cset("UI", "selected_team", index)
+
+func _online_team_item_selected(index: int) -> void:
 	check_connect(null, index)
 
 func check_connect(n, t):

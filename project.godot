@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="F1"
+config/name="Formule"
 run/main_scene="uid://dhftk8xcjqbct"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/show_image=false

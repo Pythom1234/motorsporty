@@ -15,6 +15,15 @@ var _dev_steer_max = null
 var _dev_steer_min = null
 var _dev_max_speed = null
 
+func alert(text, duration):
+	$CanvasLayer/UI/Alert/Panel.text = text
+	var tween = create_tween()
+	tween.parallel().tween_property($CanvasLayer/UI/Alert, "modulate:a", 1, .1)
+	tween.parallel().tween_property($CanvasLayer/UI/Alert, "position:y", 70, .1)
+	await get_tree().create_timer(duration).timeout
+	$CanvasLayer/UI/Alert.position.y = 0
+	$CanvasLayer/UI/Alert.modulate.a = 0
+
 func format_time(time):
 	return (
 		"%d.%03d" % [int(time / 1000.0) % 60, time % 1000]
@@ -50,6 +59,7 @@ func _process(delta: float) -> void:
 			await get_tree().create_timer(0.2).timeout
 			$CanvasLayer/UI/Lights.visible = false
 		if starting > 3 and (Input.is_action_pressed("forward") or Input.is_action_pressed("backward")):
+			alert("Jump start - 2s penalty", 5.5 - starting + 2)
 			penalty = 2
 	else:
 		if keep_time <= 0:
@@ -59,7 +69,6 @@ func _process(delta: float) -> void:
 			keep_time -= delta
 
 	if penalty <= 0:
-		$CanvasLayer/UI/Penalty.visible = false
 		if starting == -1:
 			if dir < -0.5:
 				engine_force = Input.get_action_strength("forward") * 6700.0
@@ -70,7 +79,6 @@ func _process(delta: float) -> void:
 			else:
 				engine_force = Input.get_axis("backward", "forward") * 6700.0
 	else:
-		$CanvasLayer/UI/Penalty.visible = true
 		if starting == -1:
 			penalty -= delta
 
@@ -135,3 +143,5 @@ func enter_area(area):
 	if "Checkpoint" in area.name:
 		if not str(area.name)[-1] in checkpoints:
 			checkpoints.append(str(area.name)[-1])
+	if "CC" in area.name:
+		alert("Warning: corner cutting", 3)

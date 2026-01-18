@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dhftk8xcjqbct"]
+[gd_scene load_steps=28 format=3 uid="uid://dhftk8xcjqbct"]
 
 [ext_resource type="Script" uid="uid://dprnpc1qkbf8l" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://b3nxoh3vepgeb" path="res://f1.scn" id="2_fc0e3"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://pugjo8uefqtv" path="res://assets/logos/kicksauber.png" id="15_f1jbl"]
 [ext_resource type="Texture2D" uid="uid://b8m0jcqen7jwm" path="res://assets/logos/alpine.png" id="16_vaj68"]
 [ext_resource type="Script" uid="uid://r7mscousq4s8" path="res://dev_mode.gd" id="17_e8heu"]
+[ext_resource type="Texture2D" uid="uid://ciolx2xoxiok3" path="res://assets/images/back.png" id="18_rvswv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwb40"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -39,6 +40,9 @@ point_count = 24
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fc0e3"]
 size = Vector3(4, 4, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvswv"]
+size = Vector3(4, 4, 18)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryrav"]
 content_margin_left = 0.0
@@ -115,6 +119,102 @@ transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258
 shape = SubResource("BoxShape3D_fc0e3")
 debug_color = Color(1, 0, 0.016666412, 1)
 
+[node name="CC1" type="Area3D" parent="Areas"]
+transform = Transform3D(-0.29199106, 0.054904386, 0.95484376, 0.058773328, 0.99749416, -0.039383955, -0.95461345, 0.04461959, -0.29448634, -3.298996, 1.9420137, -134.0153)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC1"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
+[node name="CC2" type="Area3D" parent="Areas"]
+transform = Transform3D(0.09995681, 0.05490438, 0.9934757, 0.038971648, 0.9974941, -0.05904753, -0.99422824, 0.04461959, 0.097566545, 5.51244, 10.438128, -191.3278)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC2"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
+[node name="CC3" type="Area3D" parent="Areas"]
+transform = Transform3D(0.09995681, 0.05490438, 0.9934757, 0.038971648, 0.9974941, -0.05904753, -0.99422824, 0.04461959, 0.097566545, 121.06655, 28.955166, -358.74792)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC3"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
+[node name="CC4" type="Area3D" parent="Areas"]
+transform = Transform3D(0.9925386, 0.054904375, 0.10886934, -0.049650133, 0.9974941, -0.050401043, -0.11136373, 0.044619583, 0.99277735, 281.33914, 27.369156, -464.62735)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC4"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
+[node name="CC5" type="Area3D" parent="Areas"]
+transform = Transform3D(0.99839014, 0.05490438, -0.014226504, -0.055480666, 0.9974941, -0.04390098, 0.011780538, 0.044619583, 0.9989344, 394.88983, 29.36186, -519.6837)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC5"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
+[node name="CC6" type="Area3D" parent="Areas"]
+transform = Transform3D(0.9460459, 0.05490438, 0.31934714, -0.037676346, 0.99749404, -0.059882335, -0.32183474, 0.044619583, 0.9457437, 420.06958, 18.49762, -303.7767)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC6"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
+[node name="CC7" type="Area3D" parent="Areas"]
+transform = Transform3D(0.9460459, 0.05490438, 0.31934714, -0.037676346, 0.99749404, -0.059882335, -0.32183474, 0.044619583, 0.9457437, 371.66873, 11.849986, -268.1849)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC7"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
+[node name="CC8" type="Area3D" parent="Areas"]
+transform = Transform3D(0.9523902, 0.05490438, 0.29989678, -0.03889535, 0.9974941, -0.05909782, -0.30239007, 0.044619586, 0.95213914, 259.3252, 1.0290291, -168.41286)
+monitorable = false
+gravity_point_center = Vector3(0, 1, 0)
+gravity_direction = Vector3(0, 1, 0)
+script = ExtResource("5_7jktm")
+
+[node name="Shape" type="CollisionShape3D" parent="Areas/CC8"]
+transform = Transform3D(1.0000005, 0, -6.854534e-07, 5.6251884e-07, 1, -6.519258e-07, 0, 0, 1.0000014, 0, 0, 0)
+shape = SubResource("BoxShape3D_rvswv")
+debug_color = Color(0, 0, 1, 1)
+
 [node name="Checkpoint1" type="Area3D" parent="Areas"]
 transform = Transform3D(0.34008542, 0.054904386, 0.93879056, 0.02333339, 0.99749416, -0.06679036, -0.9401051, 0.044619583, 0.33795196, -0.847368, -6.078912, -93.915375)
 monitorable = false
@@ -159,6 +259,7 @@ debug_color = Color(1, 0, 0.016666412, 1)
 layer = 10
 
 [node name="Prepare" type="Control" parent="CanvasLayer"]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,7 +289,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 1
+current_tab = 3
 tab_focus_mode = 1
 
 [node name="DevMode" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
@@ -212,6 +313,7 @@ grow_vertical = 2
 text = "Start"
 
 [node name="Shop" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -350,7 +452,6 @@ size_flags_horizontal = 4
 text = "Start race"
 
 [node name="Online" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
@@ -464,20 +565,23 @@ text = "[b]Head dev[/b]
 [center]Sinty[/center]
 [b]Formula design[/b]
 [center]Krisis[/center]
-[b]Beta testing[/b]
-[center]Krisis[/center]
+[b]Creative Support[/b]
 [center]ToMaTeVe[/center]
 [center]Sinty[/center]
+[center]Krisis[/center]
+[b]Beta testing[/b]
 [center]Danda[/center]
+[center]Krisis[/center]
 [center]J. Kori[/center]
+[center]ToMaTeVe[/center]
+[center]Sinty[/center]
 [center]Kubiss[/center]
-[center]seržant Chawo[/center]
-[b]Cheerleader:[/b]
-[center]ToMaTeVe[/center]"
+[center]seržant Chawo[/center]"
 shortcut_keys_enabled = false
 
 [node name="Finish" type="Control" parent="CanvasLayer"]
 visible = false
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -626,6 +730,14 @@ min_value = 100.0
 max_value = 300.0
 value = 100.0
 
+[node name="Back" type="Button" parent="CanvasLayer"]
+offset_right = 50.0
+offset_bottom = 50.0
+theme = ExtResource("6_ryrav")
+icon = ExtResource("18_rvswv")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/DevMode/Start" to="." method="start_devmode"]
 [connection signal="focus_entered" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code" to="." method="_code_focus_entered"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Submit" to="." method="code_submit"]
@@ -633,9 +745,11 @@ value = 100.0
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Minus" to="." method="_minus_pressed"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Plus" to="." method="_plus_pressed"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Plus2" to="." method="_plus_2_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team" to="." method="_team_item_selected"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Start" to="." method="start_local"]
 [connection signal="focus_entered" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name" to="." method="_name_focus_entered"]
 [connection signal="text_changed" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name" to="." method="_name_text_changed"]
+[connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team" to="." method="_online_team_item_selected"]
 [connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team" to="." method="_team_item_selected"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Connect" to="." method="start_online"]
 [connection signal="pressed" from="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Again" to="." method="retry"]
@@ -643,3 +757,4 @@ value = 100.0
 [connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/SteerMax" to="CanvasLayer/DevMode" method="_on_steer_max_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/SteerMin" to="CanvasLayer/DevMode" method="_on_steer_min_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/MaxSpeed" to="CanvasLayer/DevMode" method="_on_max_speed_value_changed"]
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="retry"]
