@@ -1,0 +1,668 @@
+[gd_scene load_steps=24 format=3 uid="uid://dhftk8xcjqbct"]
+
+[ext_resource type="Script" uid="uid://dprnpc1qkbf8l" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://t06gktcdqg38" path="res://assets/tracks/mugello.scn" id="2_7sc4i"]
+[ext_resource type="Theme" uid="uid://dwlad5x4fvbgs" path="res://assets/theme.tres" id="6_ryrav"]
+[ext_resource type="Texture2D" uid="uid://dd8otmdui35ie" path="res://assets/logos/mclaren.png" id="7_80cx4"]
+[ext_resource type="Texture2D" uid="uid://bnb3ttswl0dmd" path="res://assets/logos/mercedes.png" id="8_e8heu"]
+[ext_resource type="Texture2D" uid="uid://bu6ctqa80mugy" path="res://assets/logos/redbullracing.png" id="9_rvswv"]
+[ext_resource type="Texture2D" uid="uid://tlreeargi6xs" path="res://assets/logos/ferrari.png" id="10_boyg6"]
+[ext_resource type="Texture2D" uid="uid://dw2nfh383c8is" path="res://assets/logos/williams.png" id="11_e36ub"]
+[ext_resource type="Texture2D" uid="uid://dpibvm1qf2r2s" path="res://assets/logos/racingbulls.png" id="12_hb5m1"]
+[ext_resource type="Texture2D" uid="uid://80cja3mq677e" path="res://assets/logos/astonmartin.png" id="13_x5p1p"]
+[ext_resource type="Texture2D" uid="uid://dws4nem2dw3q" path="res://assets/logos/haasf1team.png" id="14_qhcbd"]
+[ext_resource type="Texture2D" uid="uid://pugjo8uefqtv" path="res://assets/logos/kicksauber.png" id="15_f1jbl"]
+[ext_resource type="Texture2D" uid="uid://b8m0jcqen7jwm" path="res://assets/logos/alpine.png" id="16_vaj68"]
+[ext_resource type="Script" uid="uid://r7mscousq4s8" path="res://dev_mode.gd" id="17_e8heu"]
+[ext_resource type="Texture2D" uid="uid://ciolx2xoxiok3" path="res://assets/images/back.png" id="18_rvswv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwb40"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_80nbo"]
+sky_material = SubResource("ProceduralSkyMaterial_mwb40")
+
+[sub_resource type="Environment" id="Environment_e2o6t"]
+background_mode = 2
+sky = SubResource("Sky_80nbo")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryrav"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.35, 0.35, 0.35, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_80cx4"]
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8heu"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvswv"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_top = 3
+border_color = Color(1, 0.40784314, 0, 0.7490196)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_rvswv"]
+font_size = 40
+
+[node name="Game" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_e2o6t")
+
+[node name="Track" parent="." instance=ExtResource("2_7sc4i")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(1, 0.95, 0.9, 1)
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 30.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e2o6t")
+
+[node name="Shadows" type="Node3D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Prepare" type="Control" parent="CanvasLayer"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_ryrav")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Prepare"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ryrav")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Prepare/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
+tab_focus_mode = 1
+
+[node name="Shop" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 74.0
+offset_right = -100.0
+offset_bottom = 74.0
+grow_horizontal = 2
+
+[node name="Code" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Code:"
+
+[node name="Code" type="LineEdit" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Submit" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+layout_mode = 2
+text = "OK"
+
+[node name="Reset" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Reset all"
+
+[node name="Local" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 74.0
+offset_right = -100.0
+offset_bottom = 166.0
+grow_horizontal = 2
+
+[node name="Laps" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Laps:"
+
+[node name="Minus2" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "- -"
+
+[node name="Minus" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "-"
+
+[node name="Laps" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "5"
+horizontal_alignment = 1
+
+[node name="Plus" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "+"
+
+[node name="Plus2" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "+ +"
+
+[node name="Team" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Team:"
+
+[node name="Team" type="OptionButton" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team"]
+layout_mode = 2
+size_flags_horizontal = 3
+expand_icon = true
+selected = 2
+item_count = 10
+popup/item_0/text = "McLaren"
+popup/item_0/icon = ExtResource("7_80cx4")
+popup/item_0/id = 0
+popup/item_1/text = "Mercedes"
+popup/item_1/icon = ExtResource("8_e8heu")
+popup/item_1/id = 1
+popup/item_2/text = "Red Bull Racing"
+popup/item_2/icon = ExtResource("9_rvswv")
+popup/item_2/id = 2
+popup/item_3/text = "Ferrari"
+popup/item_3/icon = ExtResource("10_boyg6")
+popup/item_3/id = 3
+popup/item_4/text = "Williams"
+popup/item_4/icon = ExtResource("11_e36ub")
+popup/item_4/id = 4
+popup/item_5/text = "Racing Bulls"
+popup/item_5/icon = ExtResource("12_hb5m1")
+popup/item_5/id = 5
+popup/item_6/text = "Aston Martin"
+popup/item_6/icon = ExtResource("13_x5p1p")
+popup/item_6/id = 6
+popup/item_7/text = "Haas F1 Team"
+popup/item_7/icon = ExtResource("14_qhcbd")
+popup/item_7/id = 7
+popup/item_8/text = "Kick Sauber"
+popup/item_8/icon = ExtResource("15_f1jbl")
+popup/item_8/id = 8
+popup/item_9/text = "Alpine"
+popup/item_9/icon = ExtResource("16_vaj68")
+popup/item_9/id = 9
+
+[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Start" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start race"
+
+[node name="Online" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 74.0
+offset_right = -100.0
+offset_bottom = 166.0
+grow_horizontal = 2
+
+[node name="Name" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Your name:"
+
+[node name="Name" type="LineEdit" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_length = 24
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+select_all_on_focus = true
+
+[node name="Team" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Team:"
+
+[node name="Team" type="OptionButton" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team"]
+layout_mode = 2
+size_flags_horizontal = 3
+expand_icon = true
+item_count = 10
+popup/item_0/text = "McLaren"
+popup/item_0/icon = ExtResource("7_80cx4")
+popup/item_0/id = 0
+popup/item_1/text = "Mercedes"
+popup/item_1/icon = ExtResource("8_e8heu")
+popup/item_1/id = 1
+popup/item_2/text = "Red Bull Racing"
+popup/item_2/icon = ExtResource("9_rvswv")
+popup/item_2/id = 2
+popup/item_3/text = "Ferrari"
+popup/item_3/icon = ExtResource("10_boyg6")
+popup/item_3/id = 3
+popup/item_4/text = "Williams"
+popup/item_4/icon = ExtResource("11_e36ub")
+popup/item_4/id = 4
+popup/item_5/text = "Racing Bulls"
+popup/item_5/icon = ExtResource("12_hb5m1")
+popup/item_5/id = 5
+popup/item_6/text = "Aston Martin"
+popup/item_6/icon = ExtResource("13_x5p1p")
+popup/item_6/id = 6
+popup/item_7/text = "Haas F1 Team"
+popup/item_7/icon = ExtResource("14_qhcbd")
+popup/item_7/id = 7
+popup/item_8/text = "Kick Sauber"
+popup/item_8/icon = ExtResource("15_f1jbl")
+popup/item_8/id = 8
+popup/item_9/text = "Alpine"
+popup/item_9/icon = ExtResource("16_vaj68")
+popup/item_9/id = 9
+
+[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Connect" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+text = "Connect"
+
+[node name="Credits" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Prepare/Panel/TabContainer/Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 220.0
+offset_top = 20.0
+offset_right = -220.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 34
+theme_override_font_sizes/bold_font_size = 37
+bbcode_enabled = true
+text = "[b]Head dev[/b]
+[center]Fuca sw.[/center]
+[b]Design[/b]
+[center]Sinty[/center]
+[b]Formula design[/b]
+[center]Krisis[/center]
+[b]Creative support[/b]
+[center]ToMaTeVe[/center]
+[center]Sinty[/center]
+[center]Krisis[/center]
+[b]Beta testing[/b]
+[center]Danda[/center]
+[center]Krisis[/center]
+[center]J. Kori[/center]
+[center]ToMaTeVe[/center]
+[center]Sinty[/center]
+[center]Kubiss[/center]
+[center]seržant Chawo[/center]"
+shortcut_keys_enabled = false
+
+[node name="Finish" type="Control" parent="CanvasLayer"]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_ryrav")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Finish"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ryrav")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Finish/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
+
+[node name="Finish" type="Control" parent="CanvasLayer/Finish/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Finish/Panel/TabContainer/Finish"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 100.0
+offset_top = 74.0
+offset_right = -100.0
+offset_bottom = 166.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+layout_mode = 2
+text = "You finished the race!"
+label_settings = SubResource("LabelSettings_80cx4")
+horizontal_alignment = 1
+
+[node name="Time" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="BestTime" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Name" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+visible = false
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Place" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+visible = false
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Again" type="Button" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Retry"
+
+[node name="DevMode" type="Control" parent="CanvasLayer"]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("17_e8heu")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/DevMode"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 40.0
+offset_right = 307.0
+offset_bottom = 284.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e8heu")
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/DevMode/PanelContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="GravityLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Gravity"
+
+[node name="Gravity" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = -1.0
+max_value = 3.5
+step = 0.05
+
+[node name="SteerMaxLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Steer max"
+
+[node name="SteerMax" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 25.0
+step = 0.05
+
+[node name="SteerMinLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Steer min"
+
+[node name="SteerMin" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 25.0
+step = 0.05
+
+[node name="MaxSpeedLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Max speed"
+
+[node name="MaxSpeed" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 100.0
+max_value = 300.0
+value = 100.0
+
+[node name="AccelerationLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Max speed"
+
+[node name="Acceleration" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 3000.0
+max_value = 30000.0
+value = 3000.0
+
+[node name="BrakeLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Max speed"
+
+[node name="Brake" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 70.0
+value = 1.0
+
+[node name="Back" type="Button" parent="CanvasLayer"]
+offset_right = 50.0
+offset_bottom = 50.0
+theme = ExtResource("6_ryrav")
+icon = ExtResource("18_rvswv")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Alert" type="PanelContainer" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+z_index = 10
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rvswv")
+
+[node name="Panel" type="Label" parent="CanvasLayer/Alert"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_rvswv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RIP" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DevMode" type="Control" parent="CanvasLayer/RIP"]
+visible = false
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = 10.0
+
+[node name="Start" type="Button" parent="CanvasLayer/RIP/DevMode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.5
+offset_top = -79.5
+offset_right = 168.5
+offset_bottom = 79.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
+[connection signal="focus_entered" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code" to="." method="_code_focus_entered"]
+[connection signal="text_submitted" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Code" to="." method="code_submit" unbinds=1]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code/Submit" to="." method="code_submit"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Reset" to="." method="_reset_pressed"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Minus2" to="." method="_minus_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Minus" to="." method="_minus_pressed"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Plus" to="." method="_plus_pressed"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps/Plus2" to="." method="_plus_2_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team" to="." method="_team_item_selected"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Start" to="." method="start_local"]
+[connection signal="focus_entered" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name" to="." method="_name_focus_entered"]
+[connection signal="text_changed" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name" to="." method="_name_text_changed"]
+[connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team" to="." method="_online_team_item_selected"]
+[connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team" to="." method="_team_item_selected"]
+[connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Connect" to="." method="start_online"]
+[connection signal="pressed" from="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Again" to="." method="retry"]
+[connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/Gravity" to="CanvasLayer/DevMode" method="_on_gravity_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/SteerMax" to="CanvasLayer/DevMode" method="_on_steer_max_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/SteerMin" to="CanvasLayer/DevMode" method="_on_steer_min_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/MaxSpeed" to="CanvasLayer/DevMode" method="_on_max_speed_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/Acceleration" to="CanvasLayer/DevMode" method="_on_acceleration_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/Brake" to="CanvasLayer/DevMode" method="_on_brake_value_changed"]
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="retry"]
+[connection signal="pressed" from="CanvasLayer/RIP/DevMode/Start" to="." method="start_devmode"]
