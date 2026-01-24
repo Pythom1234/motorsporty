@@ -7,6 +7,43 @@ func _ready() -> void:
 	$PanelContainer/GridContainer/MaxSpeed.value = 250.0
 	$PanelContainer/GridContainer/Acceleration.value = 6700.0
 	$PanelContainer/GridContainer/Brake.value = 35.0
+	if OS.get_name() == "Web":
+		$PanelContainer/GridContainer/GravityLabel.pressed.connect(
+			func():
+				var val: String = JavaScriptBridge.eval("prompt('Value?')")
+				if val.is_valid_float():
+					$PanelContainer/GridContainer/Gravity.value = int(val)
+		)
+		$PanelContainer/GridContainer/SteerMaxLabel.pressed.connect(
+			func():
+				var val: String = JavaScriptBridge.eval("prompt('Value?')")
+				if val.is_valid_float():
+					$PanelContainer/GridContainer/SteerMax.value = int(val)
+		)
+		$PanelContainer/GridContainer/SteerMinLabel.pressed.connect(
+			func():
+				var val: String = JavaScriptBridge.eval("prompt('Value?')")
+				if val.is_valid_float():
+					$PanelContainer/GridContainer/SteerMin.value = int(val)
+		)
+		$PanelContainer/GridContainer/MaxSpeedLabel.pressed.connect(
+			func():
+				var val: String = JavaScriptBridge.eval("prompt('Value?')")
+				if val.is_valid_float():
+					$PanelContainer/GridContainer/MaxSpeed.value = int(val)
+		)
+		$PanelContainer/GridContainer/AccelerationLabel.pressed.connect(
+			func():
+				var val: String = JavaScriptBridge.eval("prompt('Value?')")
+				if val.is_valid_float():
+					$PanelContainer/GridContainer/Acceleration.value = int(val)
+		)
+		$PanelContainer/GridContainer/BrakeLabel.pressed.connect(
+			func():
+				var val: String = JavaScriptBridge.eval("prompt('Value?')")
+				if val.is_valid_float():
+					$PanelContainer/GridContainer/Brake.value = int(val)
+		)
 
 func _on_gravity_value_changed(value: float) -> void:
 	$PanelContainer/GridContainer/GravityLabel.text = "Gravity: %.1f" % value

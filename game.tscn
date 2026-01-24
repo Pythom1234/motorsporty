@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dhftk8xcjqbct"]
+[gd_scene load_steps=25 format=3 uid="uid://dhftk8xcjqbct"]
 
 [ext_resource type="Script" uid="uid://dprnpc1qkbf8l" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://t06gktcdqg38" path="res://assets/tracks/mugello.scn" id="2_7sc4i"]
@@ -59,6 +59,8 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7sc4i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvswv"]
 content_margin_left = 0.0
@@ -507,59 +509,59 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_e8heu")
 layout_mode = 2
 columns = 2
 
-[node name="GravityLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="GravityLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
-size_flags_vertical = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Gravity"
 
 [node name="Gravity" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-min_value = -1.0
-max_value = 3.5
+min_value = -2.0
+max_value = 5.0
 step = 0.05
 
-[node name="SteerMaxLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="SteerMaxLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
-size_flags_vertical = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Steer max"
 
 [node name="SteerMax" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-max_value = 25.0
+max_value = 30.0
 step = 0.05
 
-[node name="SteerMinLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="SteerMinLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
-size_flags_vertical = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Steer min"
 
 [node name="SteerMin" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-max_value = 25.0
+max_value = 30.0
 step = 0.05
 
-[node name="MaxSpeedLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="MaxSpeedLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
-size_flags_vertical = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Max speed"
 
 [node name="MaxSpeed" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-min_value = 100.0
-max_value = 300.0
+min_value = 50.0
+max_value = 350.0
 value = 100.0
 
-[node name="AccelerationLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="AccelerationLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
-size_flags_vertical = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Max speed"
 
 [node name="Acceleration" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
@@ -570,9 +572,9 @@ min_value = 3000.0
 max_value = 30000.0
 value = 3000.0
 
-[node name="BrakeLabel" type="Label" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="BrakeLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
 layout_mode = 2
-size_flags_vertical = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Max speed"
 
 [node name="Brake" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
