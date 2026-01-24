@@ -405,7 +405,7 @@ text = "[b]Head dev[/b]
 [center]ToMaTeVe[/center]
 [center]Sinty[/center]
 [center]Kubiss[/center]
-[center]seržant Chawo[/center]"
+[center]pan Yao[/center]"
 shortcut_keys_enabled = false
 
 [node name="Finish" type="Control" parent="CanvasLayer"]
