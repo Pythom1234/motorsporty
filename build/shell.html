@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0"
+        />
+        <title>$GODOT_PROJECT_NAME</title>
+        <style>
+            html,
+            body,
+            #canvas {
+                margin: 0;
+                padding: 0;
+                border: 0;
+            }
+            body {
+                color: white;
+                background-color: black;
+                overflow: hidden;
+                touch-action: none;
+            }
+            #canvas {
+                display: block;
+            }
+            #canvas:focus {
+                outline: none;
+            }
+            #status {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+            #status {
+                background-color: #505050;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                visibility: hidden;
+            }
+            #status-notice {
+                display: none;
+            }
+            #status-progress {
+                display: none;
+                width: 100%;
+            }
+            #status-notice {
+                background-color: #5b3943;
+                border-radius: 0.5rem;
+                border: 1px solid #9b3943;
+                color: #e0e0e0;
+                font-family: "Noto Sans", "Droid Sans", Arial, sans-serif;
+                line-height: 1.3;
+                margin: 0 2rem;
+                overflow: hidden;
+                padding: 1rem;
+                text-align: center;
+                z-index: 1;
+            }
+            #status-loading {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                bottom: 10%;
+                left: 50%;
+                width: 50%;
+                transform: translateX(-50%);
+            }
+            #status-text {
+                font-family: "Noto Sans", "Droid Sans", Arial, sans-serif;
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin: 0 auto;
+            }
+            #dyk-container {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                font-family: "Noto Sans", "Droid Sans", Arial, sans-serif;
+                background-color: #707070;
+                border-radius: 0.5em;
+                border: 1px solid #ddd;
+                padding: 1em;
+                width: 30%;
+                height: 30%;
+                box-shadow: 0 0 30px black;
+                transition: box-shadow 100ms ease;
+                position: relative;
+            }
+            #dyk-next {
+                color: #cccccc;
+                font-size: 1.3rem;
+                font-weight: bold;
+                position: absolute;
+                right: 5px;
+                bottom: 0;
+            }
+        </style>
+        $GODOT_HEAD_INCLUDE
+    </head>
+    <body>
+        <canvas id="canvas">
+            Your browser does not support the canvas tag.
+        </canvas>
+
+        <noscript> Your browser does not support JavaScript. </noscript>
+
+        <div id="status">
+            <div id="status-loading">
+                <span id="status-text">Loading...</span>
+                <progress id="status-progress"></progress>
+            </div>
+            <div id="status-notice"></div>
+            <div
+                id="dyk-container"
+                onpointerdown="this.style.boxShadow = '0 0 10px black';"
+                onpointerup="dyk()"
+            >
+                <span id="dyk"></span>
+                <span id="dyk-next">Další ➤</span>
+            </div>
+        </div>
+
+        <script src="$GODOT_URL"></script>
+        <script>
+            const dyks = [
+                "Věděli jste, že Formule 1 je <b>nejrychlejší silniční závodní série</b> na světě?",
+                "Věděli jste, že první Grand Prix Formule 1 se konala v roce <b>1950 v Silverstone</b> ve Velké Británii?",
+                "Věděli jste, že nejúspěšnějšími jezdci jsou <b>Michael Schumacher a Lewis Hamilton</b>, oba se 7 mistrovskými tituly?",
+                "Věděli jste, že nejrychlejší okruh je <b>Monza v Itálii</b> s průměrnou rychlostí přes 260 km/h?",
+                "Věděli jste, že vozy F1 mohou zrychlit z <b>0 na 100 km/h za méně než 2,5 sekundy</b>?",
+                "Věděli jste, že jezdci mohou při brzdění zažívat přetížení až <b>5G</b>?",
+                "Věděli jste, že vozy mají speciální systémy pro ochranu jezdců, jako je <b>HANS a Halo</b>?",
+                "Věděli jste, že <b>Max Verstappen</b> debutoval v 17 letech a je nejmladším vítězem závodu v historii (18 let a 228 dní)?",
+                "Věděli jste, že vozy mají takový přítlak, že by mohly teoreticky <b>jezdit po stropě tunelu</b>?",
+                "Věděli jste, že piloti průměrně řadí <b>50x za jedno kolo</b>, což je kolem 3 000 změn za závod?",
+                "Věděli jste, že vozy jsou navrženy tak, aby vydržely nárazy o síle až <b>80G</b>?",
+                "Věděli jste, že poslední jezdec, který přišel ve Formuli 1 o život je Jules Bianchi a na jeho počest je navždy <b>zakázáno vybrat si startovní číslo 17</b>?",
+                "Věděli jste, že v kalendáři zůstávají 4 tratě z původní sezóny 1950: <b>Silverstone, Monako, Spa a Monza</b>?",
+                "Věděli jste, že v roce 1955 <b>Alberto Ascari</b> v Monaku vyletěl s vozem až do mořského přístavu?",
+                "Věděli jste, že světový rekord v nejrychlejším pit stopu drží <b>McLaren s časem 1,80 sekundy</b>?",
+                "Věděli jste, že <b>Lewis Hamilton</b> drží rekord pro nejvíce pole position a byl prvním černošským mistrem světa?",
+                "Věděli jste, že vozy Formule 1 používají <b>hybridní motory</b> již od roku 2014?",
+                "Věděli jste, že maximální rychlost vozů F1 může přesáhnout hranici <b>370 km/h</b>?",
+                "Věděli jste, že v sezóně 2026 je v kalendáři naplánováno <b>23 závodů</b> po celém světě?",
+                "Věděli jste, že výhradním dodavatelem pneumatik je <b>Pirelli</b> a ty jsou vyvíjeny speciálně pro každý závod?",
+                "Věděli jste, že <b>hmotnost vozu</b> je striktně kontrolována a musí být splněna i s jezdcem po dojetí závodu?",
+                "Věděli jste, že nejdelší závod v historii F1 trval <b>přes 4 hodiny</b>?",
+                "Věděli jste, že Formule 1 je jednou z <b>nejdražších a technologicky nejpokročilejších</b> sportovních sérií?",
+                "Věděli jste, že <b>Max Verstappen</b> získal svůj první titul v roce 2021 a k roku 2026 má na kontě přes 40 vítězství?",
+                "Věděli jste, že <b>Mercedes</b> naprosto dominoval hybridní éře v letech 2014 až 2020?",
+                "Věděli jste, že během závodu může teplota v kokpitu dosáhnout až <b>50 °C</b>?",
+                "Věděli jste, že jezdec může během jedné Grand Prix vypotit a ztratit až <b>4 kg tělesné váhy</b>?",
+                "Věděli jste, že brzdové kotouče se při intenzivním brzdění zahřívají na teplotu přes <b>1 000 °C</b>?",
+                "Věděli jste, že <b>volant vozu F1</b> stojí více než běžné osobní auto a obsahuje stovky nastavitelných funkcí?",
+                "Věděli jste, že motor F1 má <b>tepelnou účinnost přes 50 %</b>, což je téměř dvojnásobek oproti běžným autům?",
+                "Věděli jste, že přilba jezdce F1 je tak pevná, že by ji <b>neprostřelila ani kulka</b>?",
+                "Věděli jste, že tankování paliva během závodu je <b>zakázáno již od roku 2010</b>?",
+                "Věděli jste, že pneumatika F1 dosahuje své ideální přilnavosti až při teplotě kolem <b>100 °C</b>?",
+                "Věděli jste, že monokok (šasi) je vyroben z <b>uhlíkových vláken</b>, která jsou lehčí než hliník, ale pevnější než ocel?",
+                "Věděli jste, že pro sezónu 2026 vstupuje do F1 jako nový dodavatel motorů německé <b>Audi</b>?",
+            ];
+            let dyk_id = Math.floor(Math.random() * dyks.length);
+            function dyk() {
+                const dykContainer = document.getElementById("dyk-container");
+                const dykElement = document.getElementById("dyk");
+                dykContainer.style.boxShadow = "0 0 30px black";
+                dykElement.innerHTML = dyks[dyk_id];
+                dyk_id = (dyk_id + 1) % dyks.length;
+            }
+            dyk();
+
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker.ready.then((registration) => {
+                    if (registration.waiting) {
+                        registration.waiting.postMessage("update");
+                        return;
+                    }
+                    registration.addEventListener("updatefound", () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener("statechange", () => {
+                            if (
+                                newWorker.state === "installed" &&
+                                navigator.serviceWorker.controller
+                            ) {
+                                if (
+                                    confirm(
+                                        "New update ready. Do you want to install it now?",
+                                    )
+                                ) {
+                                    newWorker.postMessage("update");
+                                }
+                            }
+                        });
+                    });
+                });
+            }
+
+            const engine = new Engine($GODOT_CONFIG);
+
+            (function () {
+                const statusOverlay = document.getElementById("status");
+                const statusProgress =
+                    document.getElementById("status-progress");
+                const statusNotice = document.getElementById("status-notice");
+                const statusText = document.getElementById("status-text");
+
+                let initializing = true;
+                let statusMode = "";
+
+                function setStatusMode(mode) {
+                    if (statusMode === mode || !initializing) {
+                        return;
+                    }
+                    if (mode === "hidden") {
+                        statusOverlay.remove();
+                        initializing = false;
+                        return;
+                    }
+                    statusOverlay.style.visibility = "visible";
+                    statusProgress.style.display =
+                        mode === "progress" ? "block" : "none";
+                    statusNotice.style.display =
+                        mode === "notice" ? "block" : "none";
+                    statusMode = mode;
+                }
+
+                function setStatusNotice(text) {
+                    while (statusNotice.lastChild) {
+                        statusNotice.removeChild(statusNotice.lastChild);
+                    }
+                    const lines = text.split("\n");
+                    lines.forEach((line) => {
+                        statusNotice.appendChild(document.createTextNode(line));
+                        statusNotice.appendChild(document.createElement("br"));
+                    });
+                }
+
+                function displayFailureNotice(err) {
+                    console.error(err);
+                    if (err instanceof Error) {
+                        setStatusNotice(err.message);
+                    } else if (typeof err === "string") {
+                        setStatusNotice(err);
+                    } else {
+                        setStatusNotice("An unknown error occurred.");
+                    }
+                    setStatusMode("notice");
+                    initializing = false;
+                }
+
+                setStatusMode("progress");
+                engine
+                    .startGame({
+                        onProgress: function (current, total) {
+                            if (current > 0 && total > 0) {
+                                statusProgress.value = current;
+                                statusProgress.max = total;
+                                statusText.textContent =
+                                    "Loading... " +
+                                    Math.round((100 * current) / total) +
+                                    "%";
+                                if (
+                                    Math.round((100 * current) / total) == 100
+                                ) {
+                                    statusProgress.removeAttribute("value");
+                                    statusProgress.removeAttribute("max");
+                                    statusText.textContent = "Unpacking...";
+                                }
+                            } else {
+                                statusProgress.removeAttribute("value");
+                                statusProgress.removeAttribute("max");
+                                statusText.textContent = "Loading...";
+                            }
+                        },
+                    })
+                    .then(() => {
+                        setStatusMode("hidden");
+                    }, displayFailureNotice);
+            })();
+        </script>
+    </body>
+</html>

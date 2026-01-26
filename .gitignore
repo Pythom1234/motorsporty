@@ -1,3 +1,6 @@
-tmp
-build
-.godot
+tmp/
+.godot/
+build/*
+!build/
+!build/shell.html
+
