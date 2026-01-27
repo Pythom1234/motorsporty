@@ -4,11 +4,11 @@ var target_position = Vector3()
 var target_rotation = Vector3()
 var label = "":
 	set(x):
-		if "[DEV]" in x:
-			$Label/SubViewport/Control/Container/Name.label_settings.font_color = Color(0.0, 0.918, 1.0)
-		else:
-			$Label/SubViewport/Control/Container/Name.label_settings.font_color = Color(1.0, 1.0, 1.0)
 		if x != null and x.length() > 0:
+			if "[DEV]" in x:
+				$Label/SubViewport/Control/Container/Name.label_settings.font_color = Color(0.0, 0.918, 1.0)
+			else:
+				$Label/SubViewport/Control/Container/Name.label_settings.font_color = Color(1.0, 1.0, 1.0)
 			$Label/SubViewport/Control/Container/Name.text = x.substr(0, x.length() - 1)
 			if x[-1] in Teams.teams.keys():
 				$Label/SubViewport/Control/Container/Team.texture = Teams.teams[x[-1]][0]

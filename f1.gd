@@ -9,6 +9,8 @@ var best_time = 0
 var keep_time = 0
 var starting = -1
 var penalty = 0
+var checkpoint_times = [0, 0, 0]
+var sector_start = 0
 
 #TODO: remove
 var _dev_steer_max = null
@@ -39,6 +41,7 @@ func set_team(code):
 		$Base_black.set_surface_override_material(0, Teams.get_secondary_material(code))
 
 func _process(delta: float) -> void:
+	print($"../..".distance())
 	var dir = -global_transform.basis.z.normalized().dot(linear_velocity.normalized())
 	var speed = linear_velocity.length()
 	if starting != -1:
@@ -50,6 +53,7 @@ func _process(delta: float) -> void:
 			set_lights(0)
 			lap_start = Time.get_ticks_msec()
 			race_start = Time.get_ticks_msec()
+			sector_start = Time.get_ticks_msec()
 			starting = -1
 			await get_tree().create_timer(0.2).timeout
 			$CanvasLayer/UI/Lights.visible = false
@@ -122,8 +126,30 @@ func _process(delta: float) -> void:
 				break
 
 func enter_area(area):
-	if area.name == "Start" and len(checkpoints) == 4:
-		var time = Time.get_ticks_msec()
+	const mapping = {
+		"Start": 2,
+		"Checkpoint1": 0,
+		"Checkpoint2": 1
+	}
+	var time = Time.get_ticks_msec()
+	if ((area.name == "Start" and len(checkpoints) == 2) or
+		("Checkpoint" in area.name and not str(area.name)[-1] in checkpoints)):
+			var n = time - sector_start
+			sector_start = time
+			var i = mapping[str(area.name)]
+			var color
+			if checkpoint_times[i] == 0:
+				checkpoint_times[i] = n
+				color = "#a72ebb"
+			elif n < checkpoint_times[i]:
+				checkpoint_times[i] = n
+				color = "#a72ebb"
+			elif n < checkpoint_times[i] + 2000:
+				color = "#42dc40"
+			else:
+				color = "#cfb004"
+			get_node("CanvasLayer/UI/Panel/MarginContainer/VBoxContainer/Sectors/S%d" % (i + 1)).color = Color(color)
+	if area.name == "Start" and len(checkpoints) == 2:
 		%Time.text = format_time(time - lap_start)
 		keep_time = 2
 		checkpoints = []
@@ -135,6 +161,10 @@ func enter_area(area):
 		%Best.text = "Best: " + format_time(best_time)
 		if lap == laps:
 			$"../..".finish(time - race_start)
+		await get_tree().create_timer(2).timeout
+		$CanvasLayer/UI/Panel/MarginContainer/VBoxContainer/Sectors/S1.color = Color(0.31, 0.31, 0.31, 1.0)
+		$CanvasLayer/UI/Panel/MarginContainer/VBoxContainer/Sectors/S2.color = Color(0.31, 0.31, 0.31, 1.0)
+		$CanvasLayer/UI/Panel/MarginContainer/VBoxContainer/Sectors/S3.color = Color(0.31, 0.31, 0.31, 1.0)
 	if "Checkpoint" in area.name:
 		if not str(area.name)[-1] in checkpoints:
 			checkpoints.append(str(area.name)[-1])

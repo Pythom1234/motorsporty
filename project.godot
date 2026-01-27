@@ -12,9 +12,9 @@ config_version=5
 
 config/name="Formule"
 run/main_scene="uid://dhftk8xcjqbct"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/show_image=false
-boot_splash/fullsize=false
+boot_splash/stretch_mode=0
 boot_splash/image="uid://bvibnwi7f2xwf"
 config/icon="uid://bvibnwi7f2xwf"
 
@@ -79,7 +79,6 @@ pointing/stretch/mode="canvas_items"
 
 common/physics_ticks_per_second=120
 common/max_physics_steps_per_frame=16
-3d/physics_engine="Jolt Physics"
 3d/solver/solver_iterations=32
 common/physics_interpolation=true
 common/solver/solver_iterations=32
@@ -93,3 +92,4 @@ textures/vram_compression/compress_with_gpu=false
 textures/vram_compression/cache_gpu_compressor=false
 lights_and_shadows/directional_shadow/size=2048
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+textures/fallback_to_gles=true

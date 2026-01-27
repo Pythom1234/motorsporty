@@ -65,6 +65,11 @@ func _process(delta: float):
 	elif state == WebSocketPeer.STATE_CLOSING:
 		pass
 	elif state == WebSocketPeer.STATE_CLOSED:
+		for i in $Track/F1/CanvasLayer/UI/Laderboard/MarginContainer/VBoxContainer.get_children():
+			i.queue_free()
+		for id in shadows.keys():
+			shadows[id].queue_free()
+			shadows.erase(id)
 		if connected:
 			socket.connect_to_url(URL)
 			sent_name = false
@@ -108,7 +113,7 @@ func add_laderboard(n, rank, highlighted=false):
 func distance():
 	var d = $Track/Path.curve.get_closest_offset($Track/F1.position)
 	var ld = $Track/Path.curve.get_baked_length() * $Track/F1.lap
-	if d > 1380 and len($Track/F1.checkpoints) < 3:
+	if d > 1570 and len($Track/F1.checkpoints) < 2:
 		return ld
 	return d + ld
 
@@ -167,7 +172,7 @@ func recieve():
 			if shadows.has(id):
 				n = shadows[id]
 			else:
-				n = preload("res://shadow.tscn").instantiate()
+				n = preload("res://shadow.scn").instantiate()
 				n.position = pos
 				n.rotation = rot
 				shadows[id] = n

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dhftk8xcjqbct"]
+[gd_scene format=3 uid="uid://dhftk8xcjqbct"]
 
 [ext_resource type="Script" uid="uid://dprnpc1qkbf8l" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://t06gktcdqg38" path="res://assets/tracks/mugello.scn" id="2_7sc4i"]
@@ -80,13 +80,13 @@ expand_margin_bottom = 5.0
 [sub_resource type="LabelSettings" id="LabelSettings_rvswv"]
 font_size = 40
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" unique_id=1780236125]
 process_mode = 3
 script = ExtResource("1_e2o6t")
 
-[node name="Track" parent="." instance=ExtResource("2_7sc4i")]
+[node name="Track" parent="." unique_id=1321570336 instance=ExtResource("2_7sc4i")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1349930523]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 light_color = Color(1, 0.95, 0.9, 1)
 shadow_enabled = true
@@ -94,15 +94,15 @@ directional_shadow_mode = 1
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 30.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=3372120]
 environment = SubResource("Environment_e2o6t")
 
-[node name="Shadows" type="Node3D" parent="."]
+[node name="Shadows" type="Node3D" parent="." unique_id=1406847505]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1172887403]
 layer = 10
 
-[node name="Prepare" type="Control" parent="CanvasLayer"]
+[node name="Prepare" type="Control" parent="CanvasLayer" unique_id=194483422]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -112,7 +112,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_ryrav")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Prepare"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Prepare" unique_id=1088945313]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ryrav")
 
-[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Prepare/Panel"]
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Prepare/Panel" unique_id=944904599]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,11 +136,11 @@ tab_alignment = 1
 current_tab = 0
 tab_focus_mode = 1
 
-[node name="Shop" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+[node name="Shop" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer" unique_id=195728141]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop" unique_id=301407816]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -150,35 +150,35 @@ offset_right = -100.0
 offset_bottom = 74.0
 grow_horizontal = 2
 
-[node name="Code" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer"]
+[node name="Code" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer" unique_id=1857133279]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code" unique_id=122826455]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Code:"
 
-[node name="Code" type="LineEdit" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+[node name="Code" type="LineEdit" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code" unique_id=749694695]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="Submit" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code"]
+[node name="Submit" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer/Code" unique_id=1310312372]
 layout_mode = 2
 text = "OK"
 
-[node name="Reset" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer"]
+[node name="Reset" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Shop/VBoxContainer" unique_id=635683562]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Reset all"
 
-[node name="Local" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+[node name="Local" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer" unique_id=1353153321]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local" unique_id=478544395]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -188,51 +188,51 @@ offset_right = -100.0
 offset_bottom = 166.0
 grow_horizontal = 2
 
-[node name="Laps" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+[node name="Laps" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer" unique_id=1756269630]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps" unique_id=1524001651]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Laps:"
 
-[node name="Minus2" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+[node name="Minus2" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps" unique_id=209273529]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "- -"
 
-[node name="Minus" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+[node name="Minus" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps" unique_id=29444458]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "-"
 
-[node name="Laps" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+[node name="Laps" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps" unique_id=897557930]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "5"
 horizontal_alignment = 1
 
-[node name="Plus" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+[node name="Plus" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps" unique_id=445313743]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "+"
 
-[node name="Plus2" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps"]
+[node name="Plus2" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Laps" unique_id=853867414]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "+ +"
 
-[node name="Team" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+[node name="Team" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer" unique_id=1521926010]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team"]
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team" unique_id=827087425]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Team:"
 
-[node name="Team" type="OptionButton" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team"]
+[node name="Team" type="OptionButton" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team" unique_id=1234352926]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_icon = true
@@ -269,22 +269,22 @@ popup/item_9/text = "Alpine"
 popup/item_9/icon = ExtResource("16_vaj68")
 popup/item_9/id = 9
 
-[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer" unique_id=1865321431]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Start" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer"]
+[node name="Start" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer" unique_id=2000161150]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Start race"
 
-[node name="Online" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+[node name="Online" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer" unique_id=1637037816]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online" unique_id=2056311675]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -294,16 +294,16 @@ offset_right = -100.0
 offset_bottom = 166.0
 grow_horizontal = 2
 
-[node name="Name" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+[node name="Name" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer" unique_id=254038989]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name"]
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name" unique_id=166697273]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Your name:"
 
-[node name="Name" type="LineEdit" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name"]
+[node name="Name" type="LineEdit" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name" unique_id=1937961161]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -313,16 +313,16 @@ emoji_menu_enabled = false
 shortcut_keys_enabled = false
 select_all_on_focus = true
 
-[node name="Team" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+[node name="Team" type="HBoxContainer" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer" unique_id=360991751]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team"]
+[node name="Label" type="Label" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team" unique_id=216059874]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Team:"
 
-[node name="Team" type="OptionButton" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team"]
+[node name="Team" type="OptionButton" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team" unique_id=1796000404]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_icon = true
@@ -358,23 +358,23 @@ popup/item_9/text = "Alpine"
 popup/item_9/icon = ExtResource("16_vaj68")
 popup/item_9/id = 9
 
-[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+[node name="Space" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer" unique_id=43585488]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Connect" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer"]
+[node name="Connect" type="Button" parent="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer" unique_id=589692264]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 disabled = true
 text = "Connect"
 
-[node name="Credits" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer"]
+[node name="Credits" type="Control" parent="CanvasLayer/Prepare/Panel/TabContainer" unique_id=114394522]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Prepare/Panel/TabContainer/Credits"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Prepare/Panel/TabContainer/Credits" unique_id=980187828]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -408,7 +408,7 @@ text = "[b]Head dev[/b]
 [center]seržant Chawo[/center]"
 shortcut_keys_enabled = false
 
-[node name="Finish" type="Control" parent="CanvasLayer"]
+[node name="Finish" type="Control" parent="CanvasLayer" unique_id=1135792096]
 visible = false
 z_index = 1
 layout_mode = 3
@@ -419,7 +419,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_ryrav")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Finish"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Finish" unique_id=712345638]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -428,7 +428,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ryrav")
 
-[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Finish/Panel"]
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/Finish/Panel" unique_id=726420927]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -442,11 +442,11 @@ grow_vertical = 2
 tab_alignment = 1
 current_tab = 0
 
-[node name="Finish" type="Control" parent="CanvasLayer/Finish/Panel/TabContainer"]
+[node name="Finish" type="Control" parent="CanvasLayer/Finish/Panel/TabContainer" unique_id=707887540]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Finish/Panel/TabContainer/Finish"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Finish/Panel/TabContainer/Finish" unique_id=1181225515]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -456,36 +456,36 @@ offset_right = -100.0
 offset_bottom = 166.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer" unique_id=111689793]
 layout_mode = 2
 text = "You finished the race!"
 label_settings = SubResource("LabelSettings_80cx4")
 horizontal_alignment = 1
 
-[node name="Time" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+[node name="Time" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer" unique_id=1045874434]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="BestTime" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+[node name="BestTime" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer" unique_id=564761472]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Name" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+[node name="Name" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer" unique_id=267391793]
 visible = false
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Place" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+[node name="Place" type="Label" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer" unique_id=1630951167]
 visible = false
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Again" type="Button" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer"]
+[node name="Again" type="Button" parent="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer" unique_id=1857695692]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Retry"
 
-[node name="DevMode" type="Control" parent="CanvasLayer"]
+[node name="DevMode" type="Control" parent="CanvasLayer" unique_id=1083402343]
 visible = false
 z_index = 1
 layout_mode = 3
@@ -497,7 +497,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("17_e8heu")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/DevMode"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/DevMode" unique_id=2108261416]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 40.0
@@ -505,16 +505,16 @@ offset_right = 307.0
 offset_bottom = 284.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e8heu")
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/DevMode/PanelContainer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/DevMode/PanelContainer" unique_id=925147389]
 layout_mode = 2
 columns = 2
 
-[node name="GravityLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="GravityLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=2131402144]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Gravity"
 
-[node name="Gravity" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="Gravity" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=665839769]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -522,36 +522,36 @@ min_value = -2.0
 max_value = 5.0
 step = 0.05
 
-[node name="SteerMaxLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="SteerMaxLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=2129584745]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Steer max"
 
-[node name="SteerMax" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="SteerMax" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=220942304]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 30.0
 step = 0.05
 
-[node name="SteerMinLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="SteerMinLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=1787185982]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Steer min"
 
-[node name="SteerMin" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="SteerMin" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=856136851]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 max_value = 30.0
 step = 0.05
 
-[node name="MaxSpeedLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="MaxSpeedLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=1594254975]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Max speed"
 
-[node name="MaxSpeed" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="MaxSpeed" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=1435637529]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -559,12 +559,12 @@ min_value = 50.0
 max_value = 350.0
 value = 100.0
 
-[node name="AccelerationLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="AccelerationLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=1075283288]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Max speed"
 
-[node name="Acceleration" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="Acceleration" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=703160755]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -572,12 +572,12 @@ min_value = 3000.0
 max_value = 30000.0
 value = 3000.0
 
-[node name="BrakeLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="BrakeLabel" type="Button" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=1349005685]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7sc4i")
 text = "Max speed"
 
-[node name="Brake" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer"]
+[node name="Brake" type="HSlider" parent="CanvasLayer/DevMode/PanelContainer/GridContainer" unique_id=206731079]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -585,7 +585,7 @@ min_value = 1.0
 max_value = 70.0
 value = 1.0
 
-[node name="Back" type="Button" parent="CanvasLayer"]
+[node name="Back" type="Button" parent="CanvasLayer" unique_id=1090938313]
 offset_right = 50.0
 offset_bottom = 50.0
 theme = ExtResource("6_ryrav")
@@ -593,7 +593,7 @@ icon = ExtResource("18_rvswv")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Alert" type="PanelContainer" parent="CanvasLayer"]
+[node name="Alert" type="PanelContainer" parent="CanvasLayer" unique_id=532265451]
 modulate = Color(1, 1, 1, 0)
 z_index = 10
 anchors_preset = 5
@@ -606,13 +606,13 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rvswv")
 
-[node name="Panel" type="Label" parent="CanvasLayer/Alert"]
+[node name="Panel" type="Label" parent="CanvasLayer/Alert" unique_id=1962934590]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_rvswv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RIP" type="Control" parent="CanvasLayer"]
+[node name="RIP" type="Control" parent="CanvasLayer" unique_id=1111046965]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -621,7 +621,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DevMode" type="Control" parent="CanvasLayer/RIP"]
+[node name="DevMode" type="Control" parent="CanvasLayer/RIP" unique_id=1127832102]
 visible = false
 anchors_preset = 0
 offset_left = 10.0
@@ -629,7 +629,7 @@ offset_top = 10.0
 offset_right = 10.0
 offset_bottom = 10.0
 
-[node name="Start" type="Button" parent="CanvasLayer/RIP/DevMode"]
+[node name="Start" type="Button" parent="CanvasLayer/RIP/DevMode" unique_id=499372865]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

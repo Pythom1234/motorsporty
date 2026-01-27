@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://dwlad5x4fvbgs"]
+[gd_resource type="Theme" format=3 uid="uid://dwlad5x4fvbgs"]
 
 [ext_resource type="FontFile" uid="uid://b2u8fypkgk2wa" path="res://assets/Formula1-Regular.ttf" id="1_5x3i2"]
 [ext_resource type="FontFile" uid="uid://cdcca438666r3" path="res://assets/Formula1-Bold-4.ttf" id="1_wl1kw"]
