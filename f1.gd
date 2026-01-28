@@ -41,8 +41,7 @@ func set_team(code):
 		$Base_black.set_surface_override_material(0, Teams.get_secondary_material(code))
 
 func _process(delta: float) -> void:
-	print($"../..".distance())
-	var dir = -global_transform.basis.z.normalized().dot(linear_velocity.normalized())
+	var dir = global_transform.basis.z.dot(linear_velocity)
 	var speed = linear_velocity.length()
 	if starting != -1:
 		%Time.text = format_time(0)
@@ -66,27 +65,25 @@ func _process(delta: float) -> void:
 			%Time.text = format_time(time)
 		else:
 			keep_time -= delta
-
+	if starting != -1 or (not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward")):
+		brake = 17
+	else:
+		brake = 0
 	if penalty <= 0:
 		if starting == -1:
-			if dir < -0.8:
-				engine_force = Input.get_action_strength("forward") * _dev_acceleration if _dev_acceleration else 6700.0
+			engine_force = Input.get_axis("backward", "forward") * _dev_acceleration if _dev_acceleration else 6700.0
+			if Input.get_axis("backward", "forward") < 0:
+				engine_force *= 1.5
+			if dir > 1:
 				brake = Input.get_action_strength("backward") * _dev_brake if _dev_brake else 35.0
-			elif dir > 0.8:
-				engine_force = -Input.get_action_strength("backward") * _dev_acceleration if _dev_acceleration else 6700.0
+			elif dir < -1:
 				brake = Input.get_action_strength("forward") * _dev_brake if _dev_brake else 35.0
-			else:
-				engine_force = Input.get_axis("backward", "forward") * _dev_acceleration if _dev_acceleration else 6700.0
 	else:
 		if starting == -1:
 			penalty -= delta
 
 	$CanvasLayer/UI/Speed.text = "%d km/h" % (speed * 3.6)
 	%Lap.text = "Lap %d/%d" % [lap + 1, laps]
-
-	if starting != -1 or (not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward")):
-		#engine_force = dir * 8000
-		brake = 17
 
 	var input_axis = Input.get_axis("right", "left")
 	# NOTE: (speed * 3.6)
@@ -144,7 +141,7 @@ func enter_area(area):
 			elif n < checkpoint_times[i]:
 				checkpoint_times[i] = n
 				color = "#a72ebb"
-			elif n < checkpoint_times[i] + 2000:
+			elif n < checkpoint_times[i] + 1500:
 				color = "#42dc40"
 			else:
 				color = "#cfb004"

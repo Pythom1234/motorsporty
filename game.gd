@@ -10,6 +10,7 @@ var waiting_start = false
 var sent_name = false
 var names = {}
 var my_name = ""
+var my_id = null
 
 var last_sent = 0
 
@@ -71,7 +72,7 @@ func _process(delta: float):
 			shadows[id].queue_free()
 			shadows.erase(id)
 		if connected:
-			socket.connect_to_url(URL)
+			socket.connect_to_url(URL + ("?id=%s" % my_id))
 			sent_name = false
 			names = {}
 
@@ -187,16 +188,15 @@ func recieve():
 		for i in $Track/F1/CanvasLayer/UI/Laderboard/MarginContainer/VBoxContainer.get_children():
 			i.queue_free()
 		var rank = max(1, place - 3)
+		var me_added = false
 		for i in seen:
-			if rank == place:
+			if not me_added and rank == place:
+				me_added = true
 				add_laderboard(my_name, rank, true)
 				rank += 1
 			add_laderboard(names.get(i), rank)
 			rank += 1
-		if rank == place:
-			add_laderboard(my_name, rank, true)
-			rank += 1
-		if not seen:
+		if not me_added:
 			add_laderboard(my_name, rank, true)
 	if action == 1:
 		# sending name of ID
@@ -226,6 +226,11 @@ func recieve():
 		connected = false
 		socket.close()
 		get_tree().reload_current_scene()
+	if action == 5:
+		# sending ID
+		if array.size() < 3:
+			return
+		my_id = array.decode_u16(1)
 
 func start_local() -> void:
 	$Track/F1.starting = 0
