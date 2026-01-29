@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 			%Time.text = format_time(time)
 		else:
 			keep_time -= delta
-	if starting != -1 or (not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward")):
+	if starting != -1 or (not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward")) or penalty > 0:
 		brake = 17
 	else:
 		brake = 0
