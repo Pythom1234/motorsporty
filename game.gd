@@ -325,9 +325,12 @@ func _plus_2_pressed() -> void:
 func _name_focus_entered() -> void:
 	var edit = $CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name
 	if OS.get_name() == "Web":
+		edit.editable = false
 		var text = JavaScriptBridge.eval("prompt('Your name?', '%s')" % edit.text.replace("'", "\\'"))
 		edit.text = text if text != null else edit.text
 		edit.release_focus.call_deferred()
+		await get_tree().process_frame
+		edit.editable = true
 	check_connect(edit.text, null)
 
 func _name_text_changed(new_text: String) -> void:

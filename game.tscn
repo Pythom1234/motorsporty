@@ -404,6 +404,7 @@ text = "[b]Head dev[/b]
 [center]J. Kori[/center]
 [center]ToMaTeVe[/center]
 [center]Sinty[/center]
+[center]#Zégo![/center]
 [center]Kubiss[/center]
 [center]seržant Chawo[/center]"
 shortcut_keys_enabled = false
@@ -656,8 +657,8 @@ text = "Start"
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Start" to="." method="start_local"]
 [connection signal="focus_entered" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name" to="." method="_name_focus_entered"]
 [connection signal="text_changed" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name" to="." method="_name_text_changed"]
-[connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team" to="." method="_online_team_item_selected"]
 [connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team" to="." method="_team_item_selected"]
+[connection signal="item_selected" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team" to="." method="_online_team_item_selected"]
 [connection signal="pressed" from="CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Connect" to="." method="start_online"]
 [connection signal="pressed" from="CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Again" to="." method="retry"]
 [connection signal="value_changed" from="CanvasLayer/DevMode/PanelContainer/GridContainer/Gravity" to="CanvasLayer/DevMode" method="_on_gravity_value_changed"]
