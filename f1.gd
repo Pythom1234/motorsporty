@@ -19,7 +19,6 @@ var _dev_max_speed = null
 var _dev_acceleration = null
 var _dev_brake = null
 
-
 func format_time(time):
 	return (
 		"%d.%03d" % [int(time / 1000.0) % 60, time % 1000]
@@ -41,6 +40,7 @@ func set_team(code):
 		$Base_black.set_surface_override_material(0, Teams.get_secondary_material(code))
 
 func _process(delta: float) -> void:
+	get_node("Views/View_%s" % Globals.cget("settings", "camera", 0)).current = true
 	var dir = global_transform.basis.z.dot(linear_velocity)
 	var speed = linear_velocity.length()
 	if starting != -1:
@@ -115,12 +115,6 @@ func _process(delta: float) -> void:
 	#apply_force(Vector3(0, -downforce, 0), Vector3(0, 0, 3))
 	#apply_force(Vector3(0, -downforce, 0), Vector3(0, 0, -2))
 
-	if Input.is_action_just_pressed("camera"):
-		for i in range($Views.get_child_count()):
-			if get_node("Views/View_%s" % i).current:
-				get_node("Views/View_%s" % i).current = false
-				get_node("Views/View_%s" % ((i + 1) % $Views.get_child_count())).current = true
-				break
 
 func enter_area(area):
 	const mapping = {

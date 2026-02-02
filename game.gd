@@ -35,6 +35,7 @@ func _ready() -> void:
 		$CanvasLayer/Prepare/Panel/TabContainer/Credits.queue_free()
 	bought = Globals.cget("shop", "bought", [])
 	update_bought()
+	update_settings()
 	$CanvasLayer/Prepare/Panel/TabContainer.current_tab = Globals.cget("UI", "selected_tab", 2)
 	$CanvasLayer/Prepare/Panel/TabContainer.tab_changed.connect(_tab_container_changed)
 	$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.selected = Globals.cget("UI", "selected_team", 0)
@@ -269,11 +270,11 @@ func finish(time):
 	get_tree().paused = true
 	$CanvasLayer/Finish.visible = true
 	$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Place.visible = false
-	$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Time.text = "Time: " + $Track/F1.format_time(time)
-	$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/BestTime.text = "Best lap time: " + $Track/F1.format_time($Track/F1.best_time)
+	$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Time.text = "Time: %s" % $Track/F1.format_time(time)
+	$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/BestTime.text = "Fastest lap: %s" % $Track/F1.format_time($Track/F1.best_time)
 	if connected:
 		$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Name.visible = true
-		$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Name.text = "Name: " + my_name.substr(0, my_name.length() - 1)
+		$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/Name.text = "Name: %s" % my_name.substr(0, my_name.length() - 1)
 		var state = socket.get_ready_state()
 		while state != WebSocketPeer.STATE_OPEN:
 			pass
@@ -282,9 +283,24 @@ func finish(time):
 		buffer.resize(1)
 		buffer.put_u8(3)
 		socket.send(buffer.data_array)
+	elif $CanvasLayer/DevMode.visible == false:
+		if Globals.cget("records", "avg_race", -1) == -1 or Globals.cget("records", "avg_race") > time / $Track/F1.laps:
+			Globals.cset("records", "avg_race", time / $Track/F1.laps)
+			$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/NewBestAvg.visible = true
+		if Globals.cget("records", "best_lap", -1) == -1 or Globals.cget("records", "best_lap") > $Track/F1.best_time:
+			Globals.cset("records", "best_lap", $Track/F1.best_time)
+			$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/NewBestLap.visible = true
+		else:
+			$CanvasLayer/Finish/Panel/TabContainer/Finish/VBoxContainer/BestTime.text += " (your best is %s)" % $Track/F1.format_time(Globals.cget("records", "best_lap", 0))
 
 func retry() -> void:
 	get_tree().reload_current_scene()
+
+func update_settings(read=true):
+	if read:
+		$CanvasLayer/Prepare/Panel/TabContainer/Settings/VBoxContainer/Camera/Camera.selected = Globals.cget("settings", "camera", 0)
+	else:
+		Globals.cset("settings", "camera", $CanvasLayer/Prepare/Panel/TabContainer/Settings/VBoxContainer/Camera/Camera.selected)
 
 func update_bought():
 	var unique = {}
