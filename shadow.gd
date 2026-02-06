@@ -6,6 +6,7 @@ var label = "":
 	set(x):
 		if x != null and x.length() > 0:
 			if "[DEV]" in x:
+				$Label/SubViewport/Control/Container/Name.label_settings = $Label/SubViewport/Control/Container/Name.label_settings.duplicate()
 				$Label/SubViewport/Control/Container/Name.label_settings.font_color = Color(0.0, 0.918, 1.0)
 			else:
 				$Label/SubViewport/Control/Container/Name.label_settings.font_color = Color(1.0, 1.0, 1.0)

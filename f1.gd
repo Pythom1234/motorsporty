@@ -40,7 +40,22 @@ func set_team(code):
 		$Base_black.set_surface_override_material(0, Teams.get_secondary_material(code))
 
 func _process(delta: float) -> void:
-	get_node("Views/View_%s" % Globals.cget("settings", "camera", 0)).current = true
+	var acceleration = _dev_acceleration if _dev_acceleration else 6700.0
+	var steer_max = 13.5 if _dev_steer_max == null else _dev_steer_max
+	var steer_min = 2.9 if _dev_steer_min == null else _dev_steer_min
+	match Globals.cget("settings", "setup", 1):
+		0:
+			acceleration = 6250
+			steer_max = 14.8
+			steer_min = 3.6
+		1:
+			acceleration = 6700
+			steer_max = 13.5
+			steer_min = 2.9
+		2:
+			acceleration = 7500
+			steer_max = 12.2
+			steer_min = 2.2
 	var dir = global_transform.basis.z.dot(linear_velocity)
 	var speed = linear_velocity.length()
 	if starting != -1:
@@ -71,7 +86,7 @@ func _process(delta: float) -> void:
 		brake = 0
 	if penalty <= 0:
 		if starting == -1:
-			engine_force = Input.get_axis("backward", "forward") * _dev_acceleration if _dev_acceleration else 6700.0
+			engine_force = Input.get_axis("backward", "forward") * acceleration
 			if Input.get_axis("backward", "forward") < 0:
 				engine_force *= 1.5
 			if dir > 1:
@@ -86,16 +101,10 @@ func _process(delta: float) -> void:
 	%Lap.text = "Lap %d/%d" % [lap + 1, laps]
 
 	var input_axis = Input.get_axis("right", "left")
-	# NOTE: (speed * 3.6)
-	#var max_steer = lerp(deg_to_rad(8.2), deg_to_rad(1.0), clamp(speed / 200.0, 0.0, 1.0))
-	#var max_steer = lerp(
-		#deg_to_rad(13.0),
-		#deg_to_rad(2.2),
-		#clamp((speed * 3.6) / (250.0), 0.0, 1.0)
-	#)
+
 	var max_steer = lerp(
-		deg_to_rad(13.5 if _dev_steer_max == null else _dev_steer_max),
-		deg_to_rad(2.9 if _dev_steer_min == null else _dev_steer_min),
+		deg_to_rad(steer_max),
+		deg_to_rad(steer_min),
 		clamp((speed * 3.6) / (250.0 if _dev_max_speed == null else _dev_max_speed), 0.0, 1.0)
 	)
 	var target_steer = input_axis * max_steer

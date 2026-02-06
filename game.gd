@@ -42,6 +42,7 @@ func _ready() -> void:
 	$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.selected = Globals.cget("UI", "selected_team", -1)
 
 func _process(delta: float):
+	get_node("Track/F1/Views/View_%s" % Globals.cget("settings", "camera", 0)).current = true
 	get_tree().paused = not race or waiting_start
 	socket.poll()
 	$Shadows.visible = not (waiting_start or $Track/F1.starting != -1 or not connected)
@@ -242,6 +243,7 @@ func start_local() -> void:
 	get_tree().paused = not race
 
 func start_online() -> void:
+	$CanvasLayer/Back.visible = false
 	var nam = $CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Name/Name.text
 	if bought.has("dev"):
 		nam = "[DEV] " + nam
@@ -299,8 +301,10 @@ func retry() -> void:
 func update_settings(read=true):
 	if read:
 		$CanvasLayer/Prepare/Panel/TabContainer/Settings/VBoxContainer/Camera/Camera.selected = Globals.cget("settings", "camera", 0)
+		$CanvasLayer/Prepare/Panel/TabContainer/Settings/VBoxContainer/Setup/Setup.selected = Globals.cget("settings", "setup", 1)
 	else:
 		Globals.cset("settings", "camera", $CanvasLayer/Prepare/Panel/TabContainer/Settings/VBoxContainer/Camera/Camera.selected)
+		Globals.cset("settings", "setup", $CanvasLayer/Prepare/Panel/TabContainer/Settings/VBoxContainer/Setup/Setup.selected)
 
 func update_bought():
 	var unique = {}
