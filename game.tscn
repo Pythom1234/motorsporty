@@ -473,7 +473,11 @@ text = "[b]Head dev[/b]
 [center]Kubiss[/center]
 [center]seržant Chawo[/center]
 [b]Food support[/b]
-[center]seržant Chawo[/center]"
+[center]seržant Chawo[/center]
+[b]Assets[/b]
+[center][font_size=20]Assets by salasilma13, used under CC BY 4.0
+https://creativecommons.org/licenses/by/4.0/
+[/font_size][/center]"
 shortcut_keys_enabled = false
 
 [node name="Finish" type="Control" parent="CanvasLayer" unique_id=1135792096]

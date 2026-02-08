@@ -18,7 +18,8 @@ var bought = []
 const codes = {
 	"Krisis123": "gold formula",
 	"WF Fuca sw.": "dev",
-	"fired": "not dev"
+	"fired": "not dev",
+	"e8tda3mds600w": "Apx GP"
 }
 
 func alert(text, duration):
@@ -320,13 +321,21 @@ func update_bought():
 		if not has:
 			$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.add_icon_item(Teams.teams["g"][0], "Gold")
 			$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.add_icon_item(Teams.teams["g"][0], "Gold")
+	if bought.has("Apx GP"):
+		var has = false
+		for i in range($CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.item_count):
+			if $CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.get_item_text(i) == "Apx GP":
+				has = true
+		if not has:
+			$CanvasLayer/Prepare/Panel/TabContainer/Local/VBoxContainer/Team/Team.add_icon_item(Teams.teams["x"][0], "Apx GP")
+			$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.add_icon_item(Teams.teams["x"][0], "Apx GP")
 	if bought.has("not dev"):
 		bought.erase("not dev")
 		bought.erase("dev")
 		if get_node("CanvasLayer/Prepare/Panel/TabContainer/DevMode"):
 			$CanvasLayer/Prepare/Panel/TabContainer/DevMode.reparent($CanvasLayer/RIP)
 	if bought.has("dev"):
-		if get_node("CanvasLayer/RIP/DevMode"):
+		if has_node("CanvasLayer/RIP/DevMode"):
 			$CanvasLayer/RIP/DevMode.reparent($CanvasLayer/Prepare/Panel/TabContainer)
 			$CanvasLayer/Prepare/Panel/TabContainer.move_child($CanvasLayer/Prepare/Panel/TabContainer/DevMode, 0)
 

@@ -11,7 +11,8 @@ const teams = {
 	"h": [preload("res://assets/logos/haasf1team.png"), preload("res://assets/skins/haasf1team.png")],
 	"u": [preload("res://assets/logos/kicksauber.png"), preload("res://assets/skins/kicksauber.png")],
 	"a": [preload("res://assets/logos/alpine.png"), preload("res://assets/skins/alpine.png")],
-	"g": [preload("res://assets/logos/gold.png")]
+	"g": [preload("res://assets/logos/gold.png")],
+	"x": [preload("res://assets/logos/apxgp.png"), preload("res://assets/skins/apxgp.png")]
 }
 
 #const teams = {
@@ -38,7 +39,8 @@ const codes = {
 	"Haas F1 Team": "h",
 	"Kick Sauber": "u",
 	"Alpine": "a",
-	"Gold": "g"
+	"Gold": "g",
+	"Apx GP": "x"
 }
 
 #const codes2 = {
