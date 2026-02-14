@@ -356,8 +356,10 @@ func _name_focus_entered() -> void:
 	if OS.get_name() == "Web":
 		edit.editable = false
 		var text = JavaScriptBridge.eval("prompt('Your name?', '%s')" % edit.text.replace("'", "\\'"))
-		edit.text = text if text != null else edit.text
+		edit.text = text.replace("<", "").replace(">", "").replace("[", "").replace("]", "") if text != null else edit.text
 		edit.release_focus.call_deferred()
+		await get_tree().process_frame
+		$CanvasLayer/Prepare/Panel/TabContainer/Online/VBoxContainer/Team/Team.grab_focus.call_deferred(true)
 		await get_tree().process_frame
 		edit.editable = true
 	check_connect(edit.text, null)

@@ -33,6 +33,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray()
 
+[gui]
+
+common/show_focus_state_on_pointer_event=0
+
 [input]
 
 forward={
